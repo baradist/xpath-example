@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+group 'cf.baradist.xpath_example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.projectlombok:lombok:+'
+    testCompile 'org.testng:testng:6.11'
+
+}
