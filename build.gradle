@@ -13,3 +13,13 @@ dependencies {
     testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '1.3'
 
 }
+
+def mainClassName = 'cf.baradist.xpath_example.Main'
+jar {
+    manifest {
+        attributes("Implementation-Title": project.name,
+                "Implementation-Version": version,
+                "Main-Class": mainClassName)
+    }
+}
+
