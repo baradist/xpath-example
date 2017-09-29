@@ -12,21 +12,23 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
-        FileInputStream inputStream = new FileInputStream("src/main/resources/employees.xml");
-        XPathReader reader = new XPathReader(inputStream);
+        String command = args[0];
+        FileInputStream inputStream = new FileInputStream(args[1]);
+        String xPath = args[2];
 
-        System.out.println("Employee with emplid=3333");
-        System.out.println(reader.getValue("/Employees/Employee[@emplid='3333']/email"));
-        System.out.println("3. Examples: Query XML document using XPath");
-        System.out.println("3.1 Read firstname of all employees");
-        System.out.println(reader.getList("/Employees/Employee/firstname"));
-        System.out.println("3.2 Read a specific employee using employee id");
-        System.out.println(reader.getNode("/Employees/Employee[@emplid='3333']"));
-        System.out.println("3.3 Read firstname of all employees who are admin");
-        System.out.println(reader.getList("/Employees/Employee[@type='admin']/firstname"));
-        System.out.println("3.4 Read firstname of all employees who are older than 40 year");
-        System.out.println(reader.getList("/Employees/Employee[age>40]/firstname"));
-        System.out.println("3.5 Read firstname of first two employees (defined in xml file)");
-        System.out.println(reader.getList("/Employees/Employee[position() <= 2]/firstname"));
+        XPathReader reader = new XPathReader(inputStream);
+        switch (command) {
+            case "value":
+                System.out.println(reader.getValue(xPath));
+                break;
+            case "list":
+                System.out.println(reader.getList(xPath));
+                break;
+            case "node":
+                System.out.println(XPathReader.nodeToString(reader.getNode(xPath)));
+                break;
+            default:
+                System.out.println("Put following arguments: (value | list | node) path_to_xml xPath_expression");
+        }
     }
 }
